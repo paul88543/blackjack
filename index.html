@@ -1,0 +1,294 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/main.css">
+        <script src="/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/js/jquery-3.6.1.min.js"></script>
+        <script src="/assets/js/main.js"></script>
+    </head>
+    <body>
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-3">
+                    <div class="mb-2 row">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">Bet Amount</span>
+                            <input type="number" id="betamount" class="form-control" aria-describedby="basic-addon1" value="1">
+                        </div>
+                    </div>
+                    <div class="row insurance-controller d-none">
+                        <div class="col">
+                            <button type="button" id="insurance" class="btn btn-secondary w-100">Accept Insurance</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" id="no_insurance" class="btn btn-secondary w-100 h-100">No Insurance</button>
+                        </div>
+                    </div>
+                    <div class="row default-controller">
+                        <div class="col">
+                            <button type="button" id="hit" class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="#hitCardModal" disabled>Hit</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" id="stand" class="btn btn-secondary w-100" onclick="stand()" disabled>Stand</button>
+                        </div>
+                    </div>
+                    <div class="row default-controller mt-2">
+                        <div class="col">
+                            <button type="button" id="split" class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="#splitCardModal" disabled>Split</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" id="double" class="btn btn-secondary w-100" disabled>Double</button>
+                        </div>
+                    </div>
+                    <button type="button" id="bet" class="btn btn-primary w-100 mt-2" onclick="bet()" >Bet</button>
+                </div>
+                <div class="col align-self-center text-center">
+                    <button type="button" class="btn btn-warning mt-2 default-card start-button d-none" data-bs-toggle="modal" data-bs-target="#defaultCardModal">Click me to "Start"</button>
+                    
+                    <div class="start d-none">
+                        <div class="row justify-content-center">
+                            <div class="col-auto dealer">
+                                <div class="card-title">
+                                    <h4 class="title">Dealer<span class="dealer-counter"></span></h2>
+                                </div>
+                                <div class="card-item"></div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-auto player1 d-none">
+                                <div class="card-title">
+                                    <h4 class="title mt-5">Player1<span class="player1-counter"></span></h2>
+                                </div>
+                                <div class="card-item"></div>
+                            </div>
+                            <div class="col-auto player">
+                                <div class="card-title">
+                                    <h4 class="title mt-5">Player<span class="player-counter"></span></h2>
+                                </div>
+                                <div class="card-item"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h2>Bill Record</h2>
+                    <table class="table table-hover billrecord">
+                        <thead>
+                            <tr>
+                                <th>Play Type</th>
+                                <th>Bill Stauts</th>
+                                <th>Bet Amount</th>
+                                <th>Payout</th>
+                                <th>Win/Loss</th>
+                                <th>Result</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Default Card Modal -->
+        <div class="modal fade" id="defaultCardModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Default Card Value</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">Dealer 1</span>
+                                <select id="card-dealer" class="form-select form-select-lg">
+                                    <option value="A" selected>A</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="J">J</option>
+                                    <option value="Q">Q</option>
+                                    <option value="K">K</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">Dealer 2</span>
+                                <select id="card-dealer1" class="form-select form-select-lg">
+                                    <option value="A" selected>A</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="J">J</option>
+                                    <option value="Q">Q</option>
+                                    <option value="K">K</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">Plyaer 1</span>
+                                <select id="card-player" class="form-select form-select-lg">
+                                    <option value="A" selected>A</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="J">J</option>
+                                    <option value="Q">Q</option>
+                                    <option value="K">K</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">Player 2</span>
+                                <select id="card-player1" class="form-select form-select-lg">
+                                    <option value="A" selected>A</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="J">J</option>
+                                    <option value="Q">Q</option>
+                                    <option value="K">K</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" aria-label="Close" data-bs-dismiss="modal" onclick="start()">Send</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- Hit Card Modal -->
+        <div class="modal fade" id="hitCardModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Hit Card Value</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">Card Value</span>
+                                <select id="hit-card" class="form-select form-select-lg">
+                                    <option value="A" selected>A</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="J">J</option>
+                                    <option value="Q">Q</option>
+                                    <option value="K">K</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" aria-label="Close" data-bs-dismiss="modal" onclick="hit()">Send</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- Split Modal -->
+        <div class="modal fade" id="splitcardModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Split Card Value</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">Player(left)</span>
+                                <select id="split-card-player1" class="form-select form-select-lg">
+                                    <option value="A" selected>A</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="J">J</option>
+                                    <option value="Q">Q</option>
+                                    <option value="K">K</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">Plyaer(right)</span>
+                                <select id="split-card-player" class="form-select form-select-lg">
+                                    <option value="A" selected>A</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="J">J</option>
+                                    <option value="Q">Q</option>
+                                    <option value="K">K</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" aria-label="Close" data-bs-dismiss="modal" onclick="split()">Send</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </body>
+</html>
